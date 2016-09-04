@@ -30,21 +30,21 @@ class ppipn{
 	private $_submit_btn_text      = "Check out";
 	private static $_callback_ok   = null;
 	private static $_callback_fail = null;
-	public function __construct($business,$return_url,$cancal_rul,$notify_url,$envir=self::TEST){
-		$this->_business = $business;
-		$this->_pp_entrypoint_return = $return_url;
-		$this->_pp_entrypoint_cancel = $cancal_rul;
-		$this->_pp_entrypoint_ipn    = $notify_url;
+	public function __construct($envir=self::TEST){
 		if($envir == self::PRODUCT){
 			$this->_env = self::PRODUCT;
 		}
 		$this->pp_post_url = $this->_env == self::TEST ? $this->_env_test_url : $this->_env_prod_url;
 	}
-	public function showForm(){
+	public function showForm($business,$return_url,$cancal_rul,$notify_url){
+		$this->_business = $business;
+		$this->_pp_entrypoint_return = $return_url;
+		$this->_pp_entrypoint_cancel = $cancal_rul;
+		$this->_pp_entrypoint_ipn    = $notify_url;
 		include dirname(dirname(__FILE__))."/tpl/form.tpl.php";
 	}
 	public function notify($ok_callback,$fail_callback){
-		$data = tian::$context->getMessage()->getPostData();
+		$data = $_POST;
 		$postdata = "";
 		$bak = array();
 		foreach($data as $i => $v){
