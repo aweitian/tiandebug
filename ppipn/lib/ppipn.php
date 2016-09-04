@@ -41,7 +41,7 @@ class ppipn{
 		$this->pp_post_url = $this->_env == self::TEST ? $this->_env_test_url : $this->_env_prod_url;
 	}
 	public function showForm(){
-		include dirname(__FILE__)."/tpl/form.tpl.php";
+		include dirname(dirname(__FILE__))."/tpl/form.tpl.php";
 	}
 	public function notify($ok_callback,$fail_callback){
 		$data = tian::$context->getMessage()->getPostData();

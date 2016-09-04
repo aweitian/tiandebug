@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors","On");
 require 'lib/ppipn.php';
 require 'db_test.php';
 $title = "test ipn title"; // 可以POST过来
@@ -11,5 +13,5 @@ $ppipn->ordercode = $orderno;
 $db = new testipndb ();
 $item_number = $db->insertNewItem ( $title, $price ); // 向数据库插入一条记录，然后返回这个记录ID，记名叫订单号
 $ppipn->ordercode =  $item_number ; // 把订单号提交给PP
-echo $ppipn->getFormUI ();
+echo $ppipn->showForm ();
 ?>
